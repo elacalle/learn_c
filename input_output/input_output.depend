@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1713809456 source:/home/ernesto/AprenderC/input_output/input_output/main.c
+	<stdio.h>
+
+1713809289 source:/home/ernesto/AprenderC/input_output/input_output/interest_rate.c
+
+1713807935 source:/home/ernesto/AprenderC/input_output/input_output/interest_rate.c_
+	<stdio.h>
+	<stdlib.h>
+
+1713814757 source:/home/ernesto/AprenderC/input_output/input_output/quadratic.c
+	<stdio.h>
+	<math.h>
+
