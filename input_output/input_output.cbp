@@ -31,12 +31,16 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="interest_rate.c_">
+		<Unit filename="interest_rate.c">
 			<Option compilerVar="CC" />
-			<Option compile="1" />
-			<Option link="1" />
 		</Unit>
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="quadratic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="radio.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

@@ -1,3 +1,4 @@
+#include<stdio.h>
 
 void interest_rate()
 {
@@ -26,6 +27,4 @@ void interest_rate()
     result = money * rate * days / 36000;
 
     printf("Your interests for %d days are %.2f", days, result);
-
-    return 0;
 }
