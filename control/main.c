@@ -3,7 +3,6 @@
 
 void vowel();
 
-
 int main() {
     vowel();
 
