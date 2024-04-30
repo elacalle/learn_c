@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1714418425 source:/home/ernesto/AprenderC/units/control/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1714500165 source:/home/ernesto/AprenderC/units/control/vowel.c
+	<stdio.h>
+
