@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void vowel();
+// void vowel();
+void series();
 
 int main() {
-    vowel();
+    // vowel();
+    series();
 
     return 0;
 }
