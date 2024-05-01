@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1714558416 source:/home/ernesto/AprenderC/units/control/main.c
+1714577214 source:/home/ernesto/AprenderC/units/control/main.c
 	<stdio.h>
 	<stdlib.h>
 
@@ -9,4 +9,7 @@
 1714558563 source:/home/ernesto/AprenderC/units/control/series.c
 	<stdio.h>
 	<math.h>
+
+1714578139 source:/home/ernesto/AprenderC/units/control/calc.c
+	<stdio.h>
 

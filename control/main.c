@@ -2,11 +2,12 @@
 #include <stdlib.h>
 
 // void vowel();
-void series();
+// void series();
 
 int main() {
     // vowel();
-    series();
+    // series();
+    calc();
 
     return 0;
 }
