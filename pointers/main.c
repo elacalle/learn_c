@@ -19,17 +19,23 @@ tpolynomial* max(tpolynomial *firstPolynomial, tpolynomial *secondPolynomial) ;
 void refill(tpolynomial *minPolynomial, tpolynomial *maxPolynomial);
 
 int main() {
-  tpolynomial *firstPolynomial, *secondPolynomial;
+  tpolynomial *firstPolynomial, *secondPolynomial, *result;
 
   firstPolynomial = create();
   secondPolynomial = create();
 
   inspectPolynomial(firstPolynomial);
   inspectPolynomial(secondPolynomial);
-  add(firstPolynomial, secondPolynomial);
+  
+  result = add(firstPolynomial, secondPolynomial);
+  inspectPolynomial(result);
 
+  free(firstPolynomial->coef);
   free(firstPolynomial);
+  free(secondPolynomial->coef);
   free(secondPolynomial);
+  free(result->coef);
+  free(result);
 
   return 0;
 }
@@ -46,11 +52,25 @@ tpolynomial* create() {
 tpolynomial* add(tpolynomial *firstOperand, tpolynomial *secondOperand) {
   tpolynomial *minPolynomial, *maxPolynomial;
   tpolynomial *newPolynomial = malloc(sizeof(tpolynomial));
+  int *pIntArr;
 
   maxPolynomial = max(firstOperand, secondOperand);
   minPolynomial = min(firstOperand, secondOperand);
 
+  pIntArr = malloc(maxPolynomial->degree * sizeof(int));
+
   refill(minPolynomial, maxPolynomial);
+
+  newPolynomial->degree = maxPolynomial->degree;
+  newPolynomial->coef = pIntArr;
+
+  for(int i = 0; i < newPolynomial->degree; i++) {
+    int sum = *(maxPolynomial->coef + i) + *(minPolynomial->coef + i);
+
+    *(newPolynomial->coef + i) = sum;
+  }
+
+  return newPolynomial;
 }
 
 void refill(tpolynomial *minPolynomial, tpolynomial *maxPolynomial) {
