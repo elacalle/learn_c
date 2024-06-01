@@ -6,12 +6,17 @@ typedef struct {
   int *coef;
 } tpolynomial;
 
-
 tpolynomial* create();
+
 int readPolynomial(tpolynomial *polynomial);
 void inspectPolynomial(tpolynomial *polynomial);
 void cleanKeyboardInput();
 
+tpolynomial* add(tpolynomial *firstOperand, tpolynomial *secondOperand);
+
+tpolynomial* min(tpolynomial *firstPolynomial, tpolynomial *secondPolynomial) ;
+tpolynomial* max(tpolynomial *firstPolynomial, tpolynomial *secondPolynomial) ;
+void refill(tpolynomial *minPolynomial, tpolynomial *maxPolynomial);
 
 int main() {
   tpolynomial *firstPolynomial, *secondPolynomial;
@@ -21,6 +26,7 @@ int main() {
 
   inspectPolynomial(firstPolynomial);
   inspectPolynomial(secondPolynomial);
+  add(firstPolynomial, secondPolynomial);
 
   free(firstPolynomial);
   free(secondPolynomial);
@@ -37,11 +43,51 @@ tpolynomial* create() {
   return newPolynomial;
 }
 
+tpolynomial* add(tpolynomial *firstOperand, tpolynomial *secondOperand) {
+  tpolynomial *minPolynomial, *maxPolynomial;
+  tpolynomial *newPolynomial = malloc(sizeof(tpolynomial));
+
+  maxPolynomial = max(firstOperand, secondOperand);
+  minPolynomial = min(firstOperand, secondOperand);
+
+  refill(minPolynomial, maxPolynomial);
+}
+
+void refill(tpolynomial *minPolynomial, tpolynomial *maxPolynomial) {
+  int *oldCoeficient = minPolynomial->coef, *newCoefficient;
+  newCoefficient = malloc(maxPolynomial->degree * sizeof(int));
+
+  for(int i = maxPolynomial->degree; i >= 1; i--) {
+    int index = maxPolynomial->degree - i;
+    int lowerIndex = minPolynomial->degree - i;
+
+    if(lowerIndex < 0) {
+      *(newCoefficient + index) = 0;
+    } else {
+      *(newCoefficient + index) = *(oldCoeficient + lowerIndex);
+    }
+  }
+
+  minPolynomial->coef = newCoefficient;
+  free(oldCoeficient);
+}
+
+tpolynomial* max(tpolynomial *firstPolynomial, tpolynomial *secondPolynomial) {
+  if (firstPolynomial->degree > secondPolynomial->degree) { return firstPolynomial; }
+
+  return secondPolynomial;
+}
+
+tpolynomial* min(tpolynomial *firstPolynomial, tpolynomial *secondPolynomial) {
+  if (firstPolynomial->degree < secondPolynomial->degree) { return firstPolynomial; }
+
+  return secondPolynomial;
+}
+
 void inspectPolynomial(tpolynomial *polynomial) {
   if(!polynomial->degree) {
     printf("Polynomial is empty \n");  
   }
-
 
   printf("Polynomial degree is: %d \n", polynomial->degree);
   printf("Polynomial coefficients are: \n");
