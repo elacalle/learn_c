@@ -2,17 +2,18 @@
 #include <stdlib.h>
 
 typedef struct {
-  int grado;
+  int degree;
   float *coef;
-} tpolinomio;
+} tpolynomial;
 
-int readPolinom();
+int readPolynomial();
 
 int main() {
-  readPolinom();
+  readDegree();
+  readPolynomial();
 }
 
-int readPolinom() {
+int readPolynomial() {
   int result = 1, input, *pintArr, *temp, size = 0;
   pintArr = malloc(1 * sizeof(int));
 
