@@ -3,7 +3,6 @@
 #include <math.h>;
 
 float randomNumber();
-void cleanKeyboardInput();
 
 int main () {
     float initialvalue = 1, *pointer, result; 
@@ -22,11 +21,6 @@ int main () {
             while (getchar() != '\n');
         }
     }
-}
-
-void cleanKeyboardInput() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 float randomNumber(int *seed) {
