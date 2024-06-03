@@ -5,10 +5,10 @@
 float randomNumber();
 
 int main () {
-    float initialvalue = 1, *pointer, result; 
+    float *pointer, result; 
     char exitKey;
     
-    pointer = malloc(1 * sizeof(float));
+    pointer = malloc(sizeof(float));
     *pointer = 1.0;
 
     while (1) {
