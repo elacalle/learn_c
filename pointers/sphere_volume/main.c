@@ -39,7 +39,7 @@ int main() {
     probability = validObjects / 1000.0;
     volume = probability * 8;
 
-    printf("valid points %d \n", validObjects);
+    printf("Valid points %d \n", validObjects);
     printf("Probability %.2f \n", probability);
     printf("Sphere volume is %.2f \n", volume);
 
