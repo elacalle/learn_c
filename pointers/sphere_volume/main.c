@@ -20,20 +20,20 @@ float *seed;
 int main() {
     float result, probability, volume;
     int validObjects = 0;
-    struct point *currentObject;
+    struct point *randomPoint;
     seed = malloc(sizeof(float));
     *seed = time(NULL);
 
     for (int i = 0; i < 1000; i++) {
-        currentObject = malloc(sizeof(main));
+        randomPoint = malloc(sizeof(main));
 
-        assignRandomNumber(currentObject);
+        assignRandomNumber(randomPoint);
 
-        if(isValidObject(currentObject)) {
+        if(isValidObject(randomPoint)) {
             validObjects += 1;
         }
 
-        free(currentObject);
+        free(randomPoint);
     }
  
     probability = validObjects / 1000.0;
@@ -46,9 +46,9 @@ int main() {
     return 0;
 }
 
-int isValidObject(struct point *currentObject) {
+int isValidObject(struct point *randomPoint) {
     float result; 
-    result = pow(currentObject->x, 2) + pow(currentObject->y, 2) + pow(currentObject->z,  2);
+    result = pow(randomPoint->x, 2) + pow(randomPoint->y, 2) + pow(randomPoint->z,  2);
 
     if(result < 1) {
         return 1;
@@ -57,10 +57,10 @@ int isValidObject(struct point *currentObject) {
     return 0;
 }
 
-void assignRandomNumber(struct point *currentObject) {
-    currentObject->x = randomNumber();
-    currentObject->y = randomNumber();
-    currentObject->z = randomNumber();
+void assignRandomNumber(struct point *randomPoint) {
+    randomPoint->x = randomNumber();
+    randomPoint->y = randomNumber();
+    randomPoint->z = randomNumber();
 }
 
 float randomNumber() {
