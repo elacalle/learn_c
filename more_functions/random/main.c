@@ -15,7 +15,7 @@ int main () {
     int result, randomNumbers[LENGTH];
     long seed = time(NULL) % 65536;
 
-    for(long i = 0.0; i < 6.0; i++) {
+    for(int i = 0; i < 6; i++) {
         do {
             result = (int)((MAX - MIN + 1) * rnd(&seed) + MIN);
         }
@@ -26,7 +26,7 @@ int main () {
 
     sort(randomNumbers);
 
-    for(int i = 0; i < 6; i++) {
+    for(int i = 0; i < LENGTH; i++) {
         printf("%d \n", randomNumbers[i]);
     }
 }
