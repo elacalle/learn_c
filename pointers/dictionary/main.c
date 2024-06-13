@@ -19,6 +19,8 @@ int main() {
     for(int i = 0; i < size; i++) {
         printf("%s\n", list[i]);
     }
+
+    free(list);
 }
 
 int input(char ***list, int *size) {
