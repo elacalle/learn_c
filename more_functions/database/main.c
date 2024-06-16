@@ -13,31 +13,32 @@ typedef struct {
 } trecord;
 
 void menu();
-void clear_stdin(void);
 void write(trecord **records);
-void printRecord(trecord *record);
+void printRecord(trecord record);
 
-trecord* searchById(trecord *trecord);
-trecord* searchBySurname(trecord *trecord);
+trecord* searchById(trecord **trecord);
+trecord* searchBySurname(trecord **trecord);
 
-char* prompt(const char *message);
 typedef trecord* (*FuncPtr)();
 
 int main() {
     int option = 0;
-    trecord *records[SIZE];
+    trecord *records[SIZE] = { NULL };
     FuncPtr pfn[2] = { searchById, searchBySurname };
 
     while(true) {
         system("clear");
         menu();
         scanf("%d", &option);
-
-        clear_stdin();
-
+        scanf("%*c");
+    
         if(option < 1 || option > 4) {
+            scanf("%*c");
             system("clear");
-            free(prompt("Invalid option, press any key to continue. \n"));
+
+            printf("Invalid option, press any key to continue. \n");
+            getchar();
+
         } else {
             if(option == 4) {
                 break;
@@ -45,23 +46,23 @@ int main() {
                 write(records);
             } else {
                 system("clear");
-                trecord *output = (pfn[option - 1])(records);
+                trecord *output = (pfn[option - 2])(records);
 
-                printRecord(output);
+                if(output != NULL) {
+                    printf("Record found! \n");
+                    printRecord(*output);
+                } else {
+                    printf("404 Record not found! \n");
+                }
 
-                free(prompt("Press any key to continue. \n"));
+                scanf("%*c");
+                printf("Press any key to continue. \n");
+                getchar();
             }
         }
     }
 
     return 1;   
-}
-
-void clear_stdin(void) {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) {
-        // do nothing, just read and discard
-    }
 }
 
 void menu() {
@@ -73,74 +74,76 @@ void menu() {
 
 void write(trecord **records) {
     system("clear");
-
     int i = 0;
 
     while(i < SIZE) {
         trecord *newRecord = malloc(sizeof(trecord));
+        char option;
 
-        strcpy(newRecord->firstName, prompt("Write first name\n"));
-        strcpy(newRecord->lastName, prompt("Write last name\n"));
-        strcpy(newRecord->id, prompt("Write an ID\n"));
-        strcpy(newRecord->address, prompt("Write an address\n"));
+        printf("Enter your ID:\n");
+        scanf("%s", newRecord->id);
+        scanf("%*c");
 
+        printf("Enter your first name:\n");
+        scanf("%s", newRecord->firstName);
+        scanf("%*c");
+
+        printf("Enter your last name:\n");
+        scanf("%s", newRecord->lastName);
+        scanf("%*c");
+ 
+        printf("Enter your address:\n");
+        scanf("%s", newRecord->address);
+        scanf("%*c");
+        
         records[i] = newRecord;
+        i++;
 
-        if(prompt("Continue? y/n \n")[0] == 'n') {
+        printf("Press s/n to continue..\n");
+        option = getchar();
+
+        if('n' == option) {
             break;
         }
     }
 }
 
+trecord* searchById(trecord **records) {
+    char id[10];
+    printf("Write the record ID:\n");
+    scanf("%s", id);
+    trecord *foundRecord = NULL; 
 
-char* prompt(const char *message) {
-
-    clear_stdin();
-    // Mostrar el mensaje al usuario
-    printf("%s", message);
-    
-    // Asignar memoria para el buffer
-    char *buffer = malloc(100);
-    if (buffer == NULL) {
-        fprintf(stderr, "Error al asignar memoria\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    // Leer la entrada del usuario
-    if (fgets(buffer, 100, stdin) == NULL) {
-        fprintf(stderr, "Error al leer la entrada\n");
-        free(buffer);
-        exit(EXIT_FAILURE);
+    for(int i = 0; i < SIZE; i++) {
+        if(records[i] != NULL) {
+            if(strcmp(records[i]->id, id) == 0) {
+                foundRecord = records[i];
+            } 
+        }
     }
 
-    clear_stdin();
-
-    return buffer;
+    return foundRecord;
 }
 
-trecord* searchById(trecord *records) {
-     char *key = prompt("Write ID: \n");
-     trecord *foundUser = NULL;
- 
-     for(int i = 0; i < SIZE; i++) {
-         if(strcmp(records[i].id, key)) {
-             foundUser = &records[i];
- 
-             break;
-         } 
-     }
- 
-     return foundUser;
+void printRecord(trecord record) {
+    printf("%s\n", record.id);
+    printf("%s\n", record.firstName);
+    printf("%s\n", record.lastName);
+    printf("%s\n", record.address);
 }
 
-void printRecord(trecord *record) {
-    printf("%s\n", record->id);
-    printf("%s\n", record->firstName);
-    printf("%s\n", record->lastName);
-    printf("%s\n", record->address);
-}
+trecord* searchBySurname(trecord **records) {
+    char lastName[30];
+    printf("Write the record ID:\n");
+    scanf("%s", lastName);
 
-trecord* searchBySurname(trecord *records) {
-    char *surname = prompt("Write ID: \n");
+    for(int i = 0; i < SIZE; i++) {
+        if(strcmp(records[i]->lastName, lastName) == 0) {
+            return records[i];
 
+            break;
+        } 
+    }
+
+    return NULL;
 }
