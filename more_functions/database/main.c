@@ -135,7 +135,7 @@ void printRecord(trecord record) {
 
 trecord* searchBySurname(trecord **records) {
     char lastName[30];
-    printf("Write the record ID:\n");
+    printf("Write the user last name:\n");
     scanf("%s", lastName);
 
     for(int i = 0; i < SIZE; i++) {
