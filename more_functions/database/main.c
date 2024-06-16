@@ -75,6 +75,7 @@ void menu() {
 void write(trecord **records) {
     system("clear");
     int i = 0;
+    char buffer[100];
 
     while(i < SIZE) {
         trecord *newRecord = malloc(sizeof(trecord));
@@ -89,8 +90,8 @@ void write(trecord **records) {
         scanf("%*c");
 
         printf("Enter your last name:\n");
-        scanf("%s", newRecord->lastName);
-        scanf("%*c");
+        fgets(buffer, sizeof(buffer), stdin);
+        strcpy(newRecord->lastName, buffer);
  
         printf("Enter your address:\n");
         scanf("%s", newRecord->address);
