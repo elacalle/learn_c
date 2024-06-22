@@ -24,6 +24,10 @@ int main() {
     merge(dictionaryOne, sizeOne, dictionaryTwo, sizeTwo, &output, sizeResult);
 
     printf_array(output, sizeResult);
+
+    free(output);
+
+    return 1;
 }
 
 void printf_array(char *list[], int size) {
@@ -34,8 +38,8 @@ void printf_array(char *list[], int size) {
 
 void merge(char *dictionaryOne[], int sizeOne, char *dictionaryTwo[], int sizeTwo, char ***result, int sizeResult) {
     char **remaningList;
-    int minSize = sizeOne > sizeTwo ? sizeTwo : sizeOne;
     int indexA = 0, indexB = 0, index, completedIndex;
+
     *result = malloc(sizeof(char *) * sizeResult);
 
     while((indexA <= sizeOne - 1) && (indexB <= sizeTwo - 1)) {
