@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 void sort(char *dictionary[], int size);
-int gt(char *first, char *second);
 void merge(char *dictionaryOne[], int sizeOne, char *dictionaryTwo[], int sizeTwo, char ***result, int sizeResult);
 int compare(char *first, char *second);
 void printf_array(char *dictionaryOne[], int size);
@@ -19,6 +18,7 @@ int main() {
 
     sizeTwo = sizeof(dictionaryTwo) / sizeof(char *);
     sort(dictionaryTwo, sizeTwo);
+
     sizeResult = sizeOne + sizeTwo;
 
     merge(dictionaryOne, sizeOne, dictionaryTwo, sizeTwo, &output, sizeResult);
@@ -52,7 +52,6 @@ void merge(char *dictionaryOne[], int sizeOne, char *dictionaryTwo[], int sizeTw
 
             indexA++;
         }
-
 
         index++;
     }
